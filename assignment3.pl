@@ -68,7 +68,7 @@ counti([LE | LT], N) :- counti(LT, N), atom(LE).
 % ?- umem(X, [a,a,b]).
 % X = a ;
 % X = b.
-%
+
 % #4 Course Prerequisites (2 marks)
 %
 % You are given a database with facts about courses and their prerequisites,
