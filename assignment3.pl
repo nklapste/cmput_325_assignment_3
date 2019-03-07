@@ -33,6 +33,15 @@ alternate([L1E1 | L1T], [L2E1 | L2T], [L1E1, L2E1|L]) :- alternate(L1T, L2T, L).
 % Here, L is a fully instantiated, possibly nested list of integers and atoms.
 % N is the count of how many integers appear anywhere within L. N can be given,
 % or a variable. See the examples. Note that atom(X) is false for integers X.
+counti([], 0).
+counti([LE | LT], N + 1) :- counti(LT, N), integer(LE).
+counti([LE | LT], N + B) :- counti(LE, N), counti(LT, B), is_list(LE).
+counti([LE | LT], N) :- counti(LT, N), atom(LE).
+
+% Test:
+% ?- counti([1, ['foo', 2], [3, 4], ['foo', 'foo', [5]], 'foo', 6], A), X is A.
+% A =  0+1+(0+1+1+(0+1+0+(0+1)))+1,
+% X = 6
 
 % #3 (1 mark)
 %
