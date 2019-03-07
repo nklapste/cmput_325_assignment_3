@@ -21,6 +21,12 @@
 % For your education, you should also experiment with what happens if either
 % of L1 and L2 are variables, or are lists that contain some variables.
 
+alternate(L1, [], L1).
+alternate([], L2, L2).
+% TODO: this operates similar to what i want but it needs to dump the
+% elements of L instead of nesting the list
+alternate([L1E1 | L1T], [L2E1 | L2T], [L1E1, L2E1|L]) :- alternate(L1T, L2T, L).
+
 % #2 (1 mark)
 %
 % Define the predicate
