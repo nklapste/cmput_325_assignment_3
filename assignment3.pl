@@ -69,6 +69,23 @@ counti([LE | LT], N) :- counti(LT, N), atom(LE).
 % X = a ;
 % X = b.
 
+% research: looked at how member is implemented
+% member(X, [Y|T]) :- X = Y; member(X, T).
+
+% implementation:
+umem(X, [Y|T]) :-  \+ ?=(X, Y), X = Y.
+umem(X, [Y|T]) :-  umem(X, T), \+ ?=(X, Y).
+
+% test:
+% ?- umem(X, [1,1,B,A,B,C,D,E]).
+% X = 1 ;
+% X = B ;
+% X = A ;
+% X = C ;
+% X = D ;
+% X = E ;
+% false.
+
 % #4 Course Prerequisites (2 marks)
 %
 % You are given a database with facts about courses and their prerequisites,
