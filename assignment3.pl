@@ -169,6 +169,15 @@ required(C, RE) :- course(C), course(PR), prerequisite(PR, C), required(PR, R), 
 % Note that if a course has no prerequisites at all, then that is also a
 % course that you can take.
 
+% helper function to check if the first list arguement is a subset of
+% the second list arguement.
+subset([ ],_).
+subset([H|T],List) :-
+    member(H,List),
+    subset(T,List).
+
+can_take(CL, C) :- required(C, R), subset(R, CL), \+ subset(R, [C]).
+
 % #4.3 The Predicate in_cycle
 %
 % in_cycle(+C,-Cycle)
