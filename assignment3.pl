@@ -76,6 +76,16 @@ counti([LE | LT], N) :- counti(LT, N), atom(LE).
 umem(X, [Y|T]) :-  \+ ?=(X, Y), X = Y.
 umem(X, [Y|T]) :-  umem(X, T), \+ ?=(X, Y).
 
+% TODO: investigate
+% ?- umem(X, [a,a,b]).
+% X = a ;
+% X = b.
+% does not occure, but,
+%?- umem(X, [A,A,B]).
+% X = A ;
+% X = B.
+% does work
+
 % test:
 % ?- umem(X, [1,1,B,A,B,C,D,E]).
 % X = 1 ;
