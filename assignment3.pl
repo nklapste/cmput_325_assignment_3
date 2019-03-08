@@ -73,7 +73,7 @@ counti([LE | LT], N) :- counti(LT, N), atom(LE).
 % member(X, [Y|T]) :- X = Y; member(X, T).
 
 % implementation:
-umem(X, [Y|T]) :-  X \== Y, X = Y.
+umem(X, [Y|_]) :-  X \== Y, X = Y.
 umem(X, [Y|T]) :-  umem(X, T), X \== Y.
 
 % test:
