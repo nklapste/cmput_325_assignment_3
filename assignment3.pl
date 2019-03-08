@@ -123,7 +123,7 @@ umem(X, [Y|T]) :-  umem(X, T), X \== Y.
 % L = [cmput175,cmput204]
 %
 % as its only solution.
-required(C, []) :- course(C), \+ prerequisite(PR, C).
+required(C, []) :- course(C), \+ prerequisite(_, C).
 required(C, RE) :- course(C), course(PR), prerequisite(PR, C), required(PR, R), append(R, [PR], RE).
 
 % #4.2 The Predicate can_take
