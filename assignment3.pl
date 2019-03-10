@@ -91,13 +91,15 @@ umem(X, [Y|T]) :-  umem(X, T), X \== Y.
 % You are given a database with facts about courses and their prerequisites,
 % for example this is a3_miniDB.pl from our prolog code page:
 %
-% course(cmput325).
-% course(cmput175).
-% course(cmput201).
-% course(cmput204).
-% prerequisite(cmput204, cmput325).
-% prerequisite(cmput175, cmput201).
-% prerequisite(cmput175, cmput204).
+
+% TODO: enable for development
+course(cmput325).
+course(cmput175).
+course(cmput201).
+course(cmput204).
+prerequisite(cmput204, cmput325).
+prerequisite(cmput175, cmput201).
+prerequisite(cmput175, cmput204).
 %
 % To keep things simple, the following (slightly unrealistic) constraints
 % apply: All listed prerequisites are required for a course, and there are no
