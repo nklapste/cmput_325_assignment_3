@@ -227,5 +227,5 @@ prerequisite(cmput201, cmput175).
 % cycle involving a given course exactly once. However, we will only test the
 % first solution as explained above.
 rcycle(C, [MR, C]) :- course(C), course(MR), prerequisite(MR, C).
-rcycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), C \== PR, C \== MR, rcycle(C, [MR|R]), \+ member(PR, R), \+ member(PR, R).
+rcycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), C \== PR, C \== MR, rcycle(C, [MR|R]), \+ member(MR, R), \+ member(PR, R).
 in_cycle(C, [PR, MR|R]) :-  course(C), course(PR), course(MR), prerequisite(PR, MR), C == PR, rcycle(C, [MR|R]).
