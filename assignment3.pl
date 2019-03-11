@@ -213,7 +213,8 @@ can_take(CL, C) :- required(C, R), subset(R, CL), \+ subset(R, [C]).
 % Which cycles to compute? It is possible that a course C is part of multiple
 % cycles. For example, consider adding a second fact:
 %
-prerequisite(cmput201, cmput175).
+% prerequisite(cmput201, cmput175).
+% prerequisite(cmput175, cmput175).
 %
 % Now cmput175 would be part of two different cycles. Your program can return
 % either one of them (first), both are correct. We will only test the first
@@ -226,6 +227,7 @@ prerequisite(cmput201, cmput175).
 % We recommend that you write your program in a way that generates each simple
 % cycle involving a given course exactly once. However, we will only test the
 % first solution as explained above.
-rcycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), \+ prerequisite(MR, PR), C \== PR, C \== MR, rcycle(C, [MR|R]).
 rcycle(C, [MR, C]) :- course(C), course(MR), prerequisite(MR, C).
+rcycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), \+ prerequisite(MR, PR), C \== PR, C \== MR, rcycle(C, [MR|R]).
+in_cycle(C, [PR, C]) :- course(C), course(PR), prerequisite(PR, C), PR == C.
 in_cycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), C == PR, rcycle(C, [MR|R]).
