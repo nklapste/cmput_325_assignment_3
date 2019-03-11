@@ -5,6 +5,8 @@
 % as the cut operator !, the negation operators not, \+, or the if-then-else
 % operator with -> and ;.
 
+:- module(assignment3, [alternate/3, counti/2, umem/2, required/2, can_take/2, in_cycle/2]).
+
 % 1 (1 mark)
 %
 % Define the predicate
@@ -91,18 +93,14 @@ umem(X, [Y|T]) :-  umem(X, T), X \== Y.
 % You are given a database with facts about courses and their prerequisites,
 % for example this is a3_miniDB.pl from our prolog code page:
 %
-
 % TODO: enable for development of 4
-course(cmput325).
-course(cmput175).
-course(cmput201).
-course(cmput204).
-prerequisite(cmput204, cmput325).
-prerequisite(cmput175, cmput201).
-prerequisite(cmput175, cmput204).
-% TODO: enable for development of 4.3
-prerequisite(cmput325, cmput175).
-
+% course(cmput325).
+% coursce(mput175).
+% course(cmput201).
+% course(cmput204).
+% prerequisite(cmput204, cmput325).
+% prerequisite(cmput175, cmput201).
+% prerequisite(cmput175, cmput204).
 %
 % To keep things simple, the following (slightly unrealistic) constraints
 % apply: All listed prerequisites are required for a course, and there are no
@@ -227,6 +225,10 @@ can_take(CL, C) :- required(C, R), subset(R, CL), \+ subset(R, [C]).
 % We recommend that you write your program in a way that generates each simple
 % cycle involving a given course exactly once. However, we will only test the
 % first solution as explained above.
+%
+% TODO: enable for development of 4.3
+% prerequisite(cmput325, cmput175).
+%
 rcycle(C, [MR, C]) :- course(C), course(MR), prerequisite(MR, C).
 rcycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), \+ prerequisite(MR, PR), C \== PR, C \== MR, rcycle(C, [MR|R]).
 in_cycle(C, [PR, C]) :- course(C), course(PR), prerequisite(PR, C), PR == C.
