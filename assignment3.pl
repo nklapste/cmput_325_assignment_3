@@ -226,6 +226,6 @@ prerequisite(cmput201, cmput175).
 % We recommend that you write your program in a way that generates each simple
 % cycle involving a given course exactly once. However, we will only test the
 % first solution as explained above.
+rcycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), \+ prerequisite(MR, PR), C \== PR, C \== MR, rcycle(C, [MR|R]).
 rcycle(C, [MR, C]) :- course(C), course(MR), prerequisite(MR, C).
-rcycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), C \== PR, C \== MR, rcycle(C, [MR|R]), \+ member(MR, R), \+ member(PR, R).
-in_cycle(C, [PR, MR|R]) :-  course(C), course(PR), course(MR), prerequisite(PR, MR), C == PR, rcycle(C, [MR|R]).
+in_cycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), C == PR, rcycle(C, [MR|R]).
