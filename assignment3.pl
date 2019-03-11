@@ -92,7 +92,7 @@ umem(X, [Y|T]) :-  umem(X, T), X \== Y.
 % for example this is a3_miniDB.pl from our prolog code page:
 %
 
-% TODO: enable for development
+% TODO: enable for development of 4
 course(cmput325).
 course(cmput175).
 course(cmput201).
@@ -100,6 +100,8 @@ course(cmput204).
 prerequisite(cmput204, cmput325).
 prerequisite(cmput175, cmput201).
 prerequisite(cmput175, cmput204).
+% TODO: enable for development of 4.3
+prerequisite(cmput325, cmput175).
 
 %
 % To keep things simple, the following (slightly unrealistic) constraints
@@ -211,7 +213,7 @@ can_take(CL, C) :- required(C, R), subset(R, CL), \+ subset(R, [C]).
 % Which cycles to compute? It is possible that a course C is part of multiple
 % cycles. For example, consider adding a second fact:
 %
-% prerequisite(cmput201, cmput175).
+prerequisite(cmput201, cmput175).
 %
 % Now cmput175 would be part of two different cycles. Your program can return
 % either one of them (first), both are correct. We will only test the first
@@ -224,3 +226,6 @@ can_take(CL, C) :- required(C, R), subset(R, CL), \+ subset(R, [C]).
 % We recommend that you write your program in a way that generates each simple
 % cycle involving a given course exactly once. However, we will only test the
 % first solution as explained above.
+rcycle(C, [MR, C]) :- course(C), course(MR), prerequisite(MR, C).
+rcycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), C \== PR, C \== MR, rcycle(C, [MR|R]), \+ member(PR, R), \+ member(PR, R).
+in_cycle(C, [PR, MR|R]) :-  course(C), course(PR), course(MR), prerequisite(PR, MR), C == PR, rcycle(C, [MR|R]).
