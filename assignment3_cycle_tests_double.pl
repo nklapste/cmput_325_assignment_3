@@ -9,6 +9,8 @@ prerequisite(cmput204, cmput325).
 prerequisite(cmput175, cmput201).
 prerequisite(cmput175, cmput204).
 prerequisite(cmput325, cmput175).
+
+% double the cycling for cmput175 and cmput201
 prerequisite(cmput201, cmput175).
 
 :- begin_tests(assignment3_cycle_double).
