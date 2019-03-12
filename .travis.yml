@@ -1,0 +1,11 @@
+sudo: required
+
+before_install:
+  - sudo add-apt-repository ppa:swi-prolog/stable -y
+  - sudo apt-get update
+  - sudo apt-get install swi-prolog
+
+script:
+  - swipl -t "load_test_files([]), run_tests." -s assignment3_tests.pl
+  - swipl -t "load_test_files([]), run_tests." -s assignment3_cycle_tests.pl
+  - swipl -t "load_test_files([]), run_tests." -s assignment3_cycle_tests_double.pl
