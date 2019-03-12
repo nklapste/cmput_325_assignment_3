@@ -212,7 +212,6 @@ can_take(CL, C) :- required(C, R), subset(R, CL), \+ subset(R, [C]).
 % cycles. For example, consider adding a second fact:
 %
 % prerequisite(cmput201, cmput175).
-% prerequisite(cmput175, cmput175).
 %
 % Now cmput175 would be part of two different cycles. Your program can return
 % either one of them (first), both are correct. We will only test the first
@@ -226,9 +225,17 @@ can_take(CL, C) :- required(C, R), subset(R, CL), \+ subset(R, [C]).
 % cycle involving a given course exactly once. However, we will only test the
 % first solution as explained above.
 %
-% TODO: enable for development of 4.3
+% % TODO: enable for development of 4.3
+% course(cmput325).
+% course(cmput175).
+% course(cmput201).
+% course(cmput204).
+% prerequisite(cmput204, cmput325).
+% prerequisite(cmput175, cmput201).
+% prerequisite(cmput175, cmput204).
 % prerequisite(cmput325, cmput175).
-%
+% prerequisite(cmput201, cmput175).
+
 rcycle(C, [MR, C]) :- course(C), course(MR), prerequisite(MR, C).
 rcycle(C, [PR, MR|R]) :- course(C), course(PR), course(MR), prerequisite(PR, MR), \+ prerequisite(MR, PR), C \== PR, C \== MR, rcycle(C, [MR|R]).
 in_cycle(C, [PR, C]) :- course(C), course(PR), prerequisite(PR, C), PR == C.
